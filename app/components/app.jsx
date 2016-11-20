@@ -7,10 +7,12 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      precinctId: 0
+      precinctId: 0,
+      precinctName: 'Manhattan'
     }
 
     this.drawPrecinct = this.drawPrecinct.bind(this);
+    this.resetPrecinct = this.resetPrecinct.bind(this);
   }
 
   componentDidMount() {
@@ -39,15 +41,34 @@ export default class App extends React.Component {
     });
     polygon.setMap(this.map);
     polygon.addListener('click', () => {
-      this.setState({ precinctId: precinct.id });
+      this.setState({
+        precinctId: precinct.id,
+        precinctName: precinct.name
+      });
     })
   }
 
+  resetPrecinct() {
+    this.setState({
+      precinctId: 0,
+      precinctName: "Manhattan"
+    });
+  }
+
   render() {
+    const reset = (
+      <h4 onClick={this.resetPrecinct}>Back to Manhattan Statistics</h4>
+    );
+
     return (
       <div className="container">
-        <Stat precinctId={this.state.precinctId}/>
         <div id="map"></div>
+        <aside>
+          <h1>Manhattan Historical Crime Statistics</h1>
+          <h3>{this.state.precinctName}</h3>
+          {this.state.precinctId ? reset : ""}
+          <Stat precinctId={this.state.precinctId} />
+        </aside>
       </div>
     )
   }
