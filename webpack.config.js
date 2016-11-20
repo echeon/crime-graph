@@ -1,12 +1,14 @@
 const path = require('path');
 
 module.exports = {
-  entry: "./js/main.js",
+  context: __dirname,
+  entry: "./app/crime_data.jsx",
   output: {
-  	filename: "./js/bundle.js"
+    path: path.join(__dirname, 'app', 'assets', 'javascripts'),
+    filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [
@@ -15,7 +17,7 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel',
         query: {
-          presets: ['es2015']
+          presets: ['react', 'es2015']
         }
       },
       {
