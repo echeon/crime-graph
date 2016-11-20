@@ -1,4 +1,4 @@
-const precinct22 = [
+const coords = [
   {lat: 40.768679, lng: -73.981504},
   {lat: 40.768354, lng: -73.981247},
   {lat: 40.768029, lng: -73.981204},
@@ -9,4 +9,7 @@ const precinct22 = [
   {lat: 40.800621, lng: -73.958201}
 ];
 
-export default precinct22;
+export default {
+  name: "Central Park Precinct",
+  paths: coords
+};

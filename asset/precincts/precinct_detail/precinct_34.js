@@ -1,4 +1,4 @@
-const precinct34 = [
+const coords = [
   {lat: 40.851118, lng: -73.945584},
   {lat: 40.850631, lng: -73.942065},
   {lat: 40.850858, lng: -73.94155},
@@ -74,4 +74,7 @@ const precinct34 = [
   {lat: 40.851345, lng: -73.945799}
 ];
 
-export default precinct34;
+export default {
+  name: "34th Precinct",
+  paths: coords
+};

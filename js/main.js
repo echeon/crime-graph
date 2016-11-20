@@ -1,4 +1,5 @@
-import precincts from '../asset/precinct/precincts';
+import precincts from '../asset/precincts/precincts';
+import manhattan from '../asset/data/manhattan';
 
 (function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -7,13 +8,13 @@ import precincts from '../asset/precinct/precincts';
     mapTypeId: 'roadmap'
   })
 
-  precincts.forEach(precinct => { drawPolygon(precinct, map) });
+  precincts.forEach(precinct => { drawPrecinct(precinct, map) });
 
 })();
 
-function drawPolygon(paths, map) {
+function drawPrecinct(precinct, map) {
   const polygon = new google.maps.Polygon({
-    paths,
+    paths: precinct.paths,
     strokeColor: '#FF0000',
     strokeOpacity: 0.8,
     strokeWeight: 2,
@@ -22,6 +23,8 @@ function drawPolygon(paths, map) {
   });
   polygon.setMap(map);
   polygon.addListener('click', () => {
-    alert("hello");
+    alert(precinct.name);
   })
 }
+
+// console.log(manhattan);
