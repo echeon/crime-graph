@@ -10,11 +10,10 @@
 }
 
 aside {
-  text-align: center;
-  background: #fff;
   width: 65%;
   height: 100vh;
   overflow-y: auto;
+  font-family: "Muli";
 }
 
 aside header,
@@ -33,7 +32,6 @@ aside header {
 
 aside > div {
   background: #0e0e0e;
-  font-family: "Muli";
   padding: 5px 15px;
 }
 
@@ -50,7 +48,19 @@ aside header h4 {
 }
 
 .stat-container {
+  background: #ccc;
   padding: 20px;
+}
+
+.big-chart-container,
+.chart-container {
+  background: #fff;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.big-chart-container {
+  width: 100%;
 }
 
 .chart-container {
@@ -59,6 +69,11 @@ aside header h4 {
 
 .chart-title {
   text-transform: capitalize;
+  color: #999;
+  margin: 0 0 10px 5px;
+  font-family: "Titillium Web";
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 .clickable {

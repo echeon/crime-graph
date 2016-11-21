@@ -4,40 +4,14 @@ import {
   BarChart, Bar,
   LineChart, Line,
   XAxis, YAxis, CartesianGrid,
-  Tooltip, Legend
+  Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
+import colorScheme from './color_scheme';
 
-const COLORS = [
-  "#0188a2", "#20a391", "#7aa450", "#fccb8b", "#fc7839", "#a00528", "#580346"
-]
-
-function deleteElement(arr, el) {
-  const index = arr.indexOf(el);
-
-}
 
 export default class Stat extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  aggregateData() {
-    const dataObj = {};
-    let startYear = 2000;
-    let endYear = 2015;
-
-    for (let year = startYear; year <= endYear; year++) {
-      dataObj[year] = { name: year, total: 0 };
-    }
-
-    Object.values(manhattan).forEach(precinct => {
-      const totalByYear = precinct["TOTAL SEVEN MAJOR FELONY OFFENSES"];
-      Object.keys(totalByYear).forEach(year => {
-        dataObj[year].total += totalByYear[year];
-      });
-    });
-
-    return Object.values(dataObj);
   }
 
   getDataArray(stat) {
@@ -58,11 +32,11 @@ export default class Stat extends React.Component {
     const charts = [];
     const precinctStat = manhattan[id];
 
-    Object.keys(precinctStat).forEach(offense => {
-      if (offense === "TOTAL SEVEN MAJOR FELONY OFFENSES") {
-        return;
-      }
+    const offenses = Object.keys(precinctStat);
+    const indexToDelete = offenses.indexOf("TOTAL SEVEN MAJOR FELONY OFFENSES");
+    offenses.splice(indexToDelete, 1);
 
+    offenses.forEach(offense => {
       const chartTitle = offense;
       const data = this.getDataArray(precinctStat[offense]);
 
@@ -75,7 +49,7 @@ export default class Stat extends React.Component {
             <Bar dataKey="freq" fill="#8884d8" />
           </BarChart>
         </div>
-      )
+      );
 
       charts.push(chart);
     })
@@ -92,10 +66,6 @@ export default class Stat extends React.Component {
     offenses.splice(indexToDelete, 1);
 
     offenses.forEach(offense => {
-      if (offense === "TOTAL SEVEN MAJOR FELONY OFFENSES") {
-        return;
-      }
-
       const statistics = precinctStat[offense];
       Object.keys(statistics).forEach(year => {
         dataObj[year] = dataObj[year] || { year };
@@ -104,27 +74,30 @@ export default class Stat extends React.Component {
         } else {
           dataObj[year][offense] = statistics[year];
         }
-      })
+      });
     });
 
     const chartTitle = "TOTAL SEVEN MAJOR FELONY OFFENSES";
     const data = Object.values(dataObj);
 
     return (
-      <div>
+      <div className="big-chart-container">
         <h3 className="chart-title">{chartTitle}</h3>
-        <BarChart width={600} height={300} data={data}>
-          <XAxis dataKey="year" />
+        <ResponsiveContainer width="100%" aspect="2">
+        <BarChart data={data} layout="vertical">
+          <XAxis type="number" hide="true" />
+          <YAxis type="category" dataKey="year" />
           <Tooltip/>
           <Legend />
-          <Bar dataKey={offenses[0]} stackId="a" fill={COLORS[0]} />
-          <Bar dataKey={offenses[1]} stackId="a" fill={COLORS[1]} />
-          <Bar dataKey={offenses[2]} stackId="a" fill={COLORS[2]} />
-          <Bar dataKey={offenses[3]} stackId="a" fill={COLORS[3]} />
-          <Bar dataKey={offenses[4]} stackId="a" fill={COLORS[4]} />
-          <Bar dataKey={offenses[5]} stackId="a" fill={COLORS[5]} />
-          <Bar dataKey={offenses[6]} stackId="a" fill={COLORS[6]} />
+          <Bar dataKey={offenses[0]} stackId="a" fill={colorScheme[0]} />
+          <Bar dataKey={offenses[1]} stackId="a" fill={colorScheme[1]} />
+          <Bar dataKey={offenses[2]} stackId="a" fill={colorScheme[2]} />
+          <Bar dataKey={offenses[3]} stackId="a" fill={colorScheme[3]} />
+          <Bar dataKey={offenses[4]} stackId="a" fill={colorScheme[4]} />
+          <Bar dataKey={offenses[5]} stackId="a" fill={colorScheme[5]} />
+          <Bar dataKey={offenses[6]} stackId="a" fill={colorScheme[6]} />
         </BarChart>
+        </ResponsiveContainer>
       </div>
     );
   }
@@ -137,6 +110,6 @@ export default class Stat extends React.Component {
         { precinctId ? this.getAggregateChart(precinctId) : "" }
         { precinctId ? this.getCharts(precinctId) : "" }
       </div>
-    )
+    );
   }
 }
