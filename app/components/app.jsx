@@ -59,6 +59,7 @@ export default class App extends React.Component {
     const header = (
       <header>
         <h1>Manhattan Crimes by Precinct</h1>
+        <h1><span>Source: NYPD</span></h1>
       </header>
     );
 
@@ -75,7 +76,7 @@ export default class App extends React.Component {
         <aside>
           {header}
           {selectedPrecinct}
-          <section className="stat-container">
+          <section>
             <Stat precinctId={this.state.precinctId} />
           </section>
         </aside>

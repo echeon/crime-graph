@@ -14,6 +14,23 @@ export default class Stat extends React.Component {
     super(props);
   }
 
+  sumPrecinctStat() {
+    let total;
+    Object.values(manhattan).forEach(precinctStat => {
+      if (!total) {
+        total = precinctStat;
+      } else {
+        Object.keys(precinctStat).forEach(offense => {
+          Object.keys(precinctStat[offense]).forEach(year => {
+            total[offense][year] += precinctStat[offense][year];
+          })
+        })
+      }
+    });
+
+    return total;
+  }
+
   getDataArray(stat) {
     const array = [];
 
@@ -30,7 +47,7 @@ export default class Stat extends React.Component {
 
   getCharts(id) {
     const charts = [];
-    const precinctStat = manhattan[id];
+    const precinctStat = id ? manhattan[id] : this.sumPrecinctStat();
 
     const offenses = Object.keys(precinctStat);
     const indexToDelete = offenses.indexOf("TOTAL SEVEN MAJOR FELONY OFFENSES");
@@ -43,11 +60,14 @@ export default class Stat extends React.Component {
       const chart = (
         <div className="chart-container">
           <h3 className="chart-title">{chartTitle}</h3>
-          <BarChart width={300} height={200} data={data}>
-            <XAxis dataKey="year" />
-            <Tooltip/>
-            <Bar dataKey="freq" fill="#8884d8" />
-          </BarChart>
+          <ResponsiveContainer width="100%" aspect={3/2}>
+            <LineChart data={data}>
+              <XAxis dataKey="year" padding={{ left: 10, right: 10 }}/>
+              <YAxis />
+              <Tooltip/>
+              <Line dataKey="freq" stroke={colorScheme[offense]} />
+            </LineChart>
+          </ResponsiveContainer>
         </div>
       );
 
@@ -58,7 +78,7 @@ export default class Stat extends React.Component {
   }
 
   getAggregateChart(id) {
-    const precinctStat = manhattan[id];
+    const precinctStat = id ? manhattan[id] : this.sumPrecinctStat();
     const dataObj = {};
 
     const offenses = Object.keys(precinctStat);
@@ -84,19 +104,19 @@ export default class Stat extends React.Component {
       <div className="big-chart-container">
         <h3 className="chart-title">{chartTitle}</h3>
         <ResponsiveContainer width="100%" aspect="2">
-        <BarChart data={data} layout="vertical">
-          <XAxis type="number" hide="true" />
-          <YAxis type="category" dataKey="year" />
-          <Tooltip/>
-          <Legend />
-          <Bar dataKey={offenses[0]} stackId="a" fill={colorScheme[0]} />
-          <Bar dataKey={offenses[1]} stackId="a" fill={colorScheme[1]} />
-          <Bar dataKey={offenses[2]} stackId="a" fill={colorScheme[2]} />
-          <Bar dataKey={offenses[3]} stackId="a" fill={colorScheme[3]} />
-          <Bar dataKey={offenses[4]} stackId="a" fill={colorScheme[4]} />
-          <Bar dataKey={offenses[5]} stackId="a" fill={colorScheme[5]} />
-          <Bar dataKey={offenses[6]} stackId="a" fill={colorScheme[6]} />
-        </BarChart>
+          <BarChart data={data} layout="vertical">
+            <XAxis type="number" hide="true" />
+            <YAxis type="category" dataKey="year" />
+            <Tooltip/>
+            <Legend fontSize={10} layout="vertical" align="right" width={200} verticalAlign="bottom"/>
+            <Bar dataKey={offenses[0]} stackId="a" fill={colorScheme[offenses[0]]} />
+            <Bar dataKey={offenses[1]} stackId="a" fill={colorScheme[offenses[1]]} />
+            <Bar dataKey={offenses[2]} stackId="a" fill={colorScheme[offenses[2]]} />
+            <Bar dataKey={offenses[3]} stackId="a" fill={colorScheme[offenses[3]]} />
+            <Bar dataKey={offenses[4]} stackId="a" fill={colorScheme[offenses[4]]} />
+            <Bar dataKey={offenses[5]} stackId="a" fill={colorScheme[offenses[5]]} />
+            <Bar dataKey={offenses[6]} stackId="a" fill={colorScheme[offenses[6]]} />
+          </BarChart>
         </ResponsiveContainer>
       </div>
     );
@@ -104,11 +124,13 @@ export default class Stat extends React.Component {
 
   render() {
     const { precinctId } = this.props;
-
     return (
-      <div>
-        { precinctId ? this.getAggregateChart(precinctId) : "" }
-        { precinctId ? this.getCharts(precinctId) : "" }
+      <div className="stat-container">
+        {this.getAggregateChart(precinctId)}
+        <hr></hr>
+        <div className="flex">
+          {this.getCharts(precinctId)}
+        </div>
       </div>
     );
   }

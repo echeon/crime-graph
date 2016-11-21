@@ -43,18 +43,23 @@ aside header h1 {
   letter-spacing: 2px;
 }
 
+aside header h1 span {
+  font-size: 13px;
+  font-family: "Muli";
+  font-weight: normal;
+}
+
 aside header h4 {
   font-size: 15px;
 }
 
 .stat-container {
-  background: #ccc;
+  background: #fff;
   padding: 20px;
 }
 
 .big-chart-container,
 .chart-container {
-  background: #fff;
   padding: 10px;
   box-sizing: border-box;
 }
@@ -64,12 +69,14 @@ aside header h4 {
 }
 
 .chart-container {
-  width: 300px;
+  width: 30%;
+  min-width: 340px;
+  margin: 10px 0;
 }
 
 .chart-title {
   text-transform: capitalize;
-  color: #999;
+  color: #555;
   margin: 0 0 10px 5px;
   font-family: "Titillium Web";
   font-weight: 600;
@@ -78,4 +85,14 @@ aside header h4 {
 
 .clickable {
   cursor: pointer;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+hr {
+  margin-top: 20px;
 }
