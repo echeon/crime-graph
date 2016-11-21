@@ -10,13 +10,57 @@
 }
 
 aside {
+  text-align: center;
   background: #fff;
-  padding: 20px;
   width: 65%;
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
-aside h1 {
-  font-size: 30px;
+aside header,
+aside > div {
+  width: 100%;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+aside header {
+  background: #b20017;
+  padding: 0 15px;
+}
+
+aside > div {
+  background: #0e0e0e;
+  font-family: "Muli";
+  padding: 5px 15px;
+}
+
+aside header h1 {
+  font-size: 35px;
+  text-transform: uppercase;
+  font-family: "Kanit";
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+aside header h4 {
+  font-size: 15px;
+}
+
+.stat-container {
+  padding: 20px;
+}
+
+.chart-container {
+  width: 300px;
+}
+
+.chart-title {
+  text-transform: capitalize;
+}
+
+.clickable {
+  cursor: pointer;
 }

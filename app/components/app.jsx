@@ -56,19 +56,30 @@ export default class App extends React.Component {
   }
 
   render() {
-    const reset = (
-      <h4 onClick={this.resetPrecinct}>Back to Manhattan Statistics</h4>
+    const header = (
+      <header>
+        <h1>Manhattan Crimes by Precinct</h1>
+      </header>
+    );
+
+    const selectedPrecinct = (
+      <div>
+        <h3>Current View: {this.state.precinctName}</h3>
+        <h3 className="clickable"
+          onClick={this.resetPrecinct}>Back to Manhattan</h3>
+      </div>
     );
 
     return (
       <div className="container">
-        <div id="map"></div>
         <aside>
-          <h1>Manhattan Historical Crime Statistics</h1>
-          <h3>{this.state.precinctName}</h3>
-          {this.state.precinctId ? reset : ""}
-          <Stat precinctId={this.state.precinctId} />
+          {header}
+          {selectedPrecinct}
+          <section className="stat-container">
+            <Stat precinctId={this.state.precinctId} />
+          </section>
         </aside>
+        <div id="map"></div>
       </div>
     )
   }
