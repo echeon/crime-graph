@@ -21,7 +21,6 @@ time, mark, audio, video, button, input, select, option {
 	vertical-align: baseline;
   text-decoration: inherit;
 	background: transparent;
-	cursor: default;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
