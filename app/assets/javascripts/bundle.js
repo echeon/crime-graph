@@ -22252,7 +22252,7 @@
 	        ),
 	        _react2.default.createElement(
 	          _recharts.ResponsiveContainer,
-	          { width: '100%', aspect: '2' },
+	          { width: '100%', aspect: 2 },
 	          _react2.default.createElement(
 	            _recharts.BarChart,
 	            { data: data, layout: 'vertical' },

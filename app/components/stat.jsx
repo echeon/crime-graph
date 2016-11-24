@@ -103,7 +103,7 @@ export default class Stat extends React.Component {
     return (
       <div className="big-chart-container">
         <h3 className="chart-title">{chartTitle}</h3>
-        <ResponsiveContainer width="100%" aspect="2">
+        <ResponsiveContainer width="100%" aspect={2}>
           <BarChart data={data} layout="vertical">
             <XAxis type="number" hide="true" />
             <YAxis type="category" dataKey="year" />
