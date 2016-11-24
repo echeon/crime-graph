@@ -21603,7 +21603,12 @@
 	          'aside',
 	          null,
 	          header,
-	          selectedPrecinct
+	          selectedPrecinct,
+	          _react2.default.createElement(
+	            'section',
+	            null,
+	            _react2.default.createElement(_stat2.default, { precinctId: this.state.precinctId })
+	          )
 	        ),
 	        _react2.default.createElement('div', { id: 'map' })
 	      );
@@ -21612,11 +21617,6 @@
 	
 	  return App;
 	}(_react2.default.Component);
-	
-	// <section>
-	//   <Stat precinctId={this.state.precinctId} />
-	// </section>
-	
 	
 	exports.default = App;
 

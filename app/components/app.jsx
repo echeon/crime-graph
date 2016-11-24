@@ -76,14 +76,12 @@ export default class App extends React.Component {
         <aside>
           {header}
           {selectedPrecinct}
+          <section>
+            <Stat precinctId={this.state.precinctId} />
+          </section>
         </aside>
         <div id="map"></div>
       </div>
     )
   }
 }
-
-
-// <section>
-//   <Stat precinctId={this.state.precinctId} />
-// </section>
