@@ -16,7 +16,8 @@ export default class Stat extends React.Component {
 
   sumPrecinctStat() {
     let total;
-    Object.values(manhattan).forEach(precinctStat => {
+    Object.keys(manhattan).forEach(precinctId => {
+      const precinctStat = manhattan[precinctId];
       if (!total) {
         total = precinctStat;
       } else {
@@ -98,7 +99,10 @@ export default class Stat extends React.Component {
     });
 
     const chartTitle = "TOTAL SEVEN MAJOR FELONY OFFENSES";
-    const data = Object.values(dataObj);
+    const data = [];
+    Object.keys(dataObj).forEach(k => {
+      data.push(dataObj[k]);
+    });
 
     return (
       <div className="big-chart-container">

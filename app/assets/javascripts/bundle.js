@@ -22145,7 +22145,8 @@
 	    key: 'sumPrecinctStat',
 	    value: function sumPrecinctStat() {
 	      var total = void 0;
-	      Object.values(_manhattan2.default).forEach(function (precinctStat) {
+	      Object.keys(_manhattan2.default).forEach(function (precinctId) {
+	        var precinctStat = _manhattan2.default[precinctId];
 	        if (!total) {
 	          total = precinctStat;
 	        } else {
@@ -22240,7 +22241,10 @@
 	      });
 	
 	      var chartTitle = "TOTAL SEVEN MAJOR FELONY OFFENSES";
-	      var data = Object.values(dataObj);
+	      var data = [];
+	      Object.keys(dataObj).forEach(function (k) {
+	        data.push(dataObj[k]);
+	      });
 	
 	      return _react2.default.createElement(
 	        'div',
