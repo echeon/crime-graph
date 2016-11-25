@@ -23,6 +23,7 @@ aside > div {
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
 aside header {
