@@ -22187,13 +22187,13 @@
 	      var indexToDelete = offenses.indexOf("TOTAL SEVEN MAJOR FELONY OFFENSES");
 	      offenses.splice(indexToDelete, 1);
 	
-	      offenses.forEach(function (offense) {
+	      offenses.forEach(function (offense, i) {
 	        var chartTitle = offense;
 	        var data = _this2.getDataArray(precinctStat[offense]);
 	
 	        var chart = _react2.default.createElement(
 	          'div',
-	          { className: 'chart-container' },
+	          { className: 'chart-container', key: i },
 	          _react2.default.createElement(
 	            'h3',
 	            { className: 'chart-title' },
@@ -22260,7 +22260,7 @@
 	          _react2.default.createElement(
 	            _recharts.BarChart,
 	            { data: data, layout: 'vertical' },
-	            _react2.default.createElement(_recharts.XAxis, { type: 'number', hide: 'true' }),
+	            _react2.default.createElement(_recharts.XAxis, { type: 'number', hide: true }),
 	            _react2.default.createElement(_recharts.YAxis, { type: 'category', dataKey: 'year' }),
 	            _react2.default.createElement(_recharts.Tooltip, null),
 	            _react2.default.createElement(_recharts.Legend, { fontSize: 10, layout: 'vertical', align: 'right', width: 200, verticalAlign: 'bottom' }),

@@ -54,12 +54,12 @@ export default class Stat extends React.Component {
     const indexToDelete = offenses.indexOf("TOTAL SEVEN MAJOR FELONY OFFENSES");
     offenses.splice(indexToDelete, 1);
 
-    offenses.forEach(offense => {
+    offenses.forEach((offense, i) => {
       const chartTitle = offense;
       const data = this.getDataArray(precinctStat[offense]);
 
       const chart = (
-        <div className="chart-container">
+        <div className="chart-container" key={i}>
           <h3 className="chart-title">{chartTitle}</h3>
           <ResponsiveContainer width="100%" aspect={3/2}>
             <LineChart data={data}>
@@ -109,7 +109,7 @@ export default class Stat extends React.Component {
         <h3 className="chart-title">{chartTitle}</h3>
         <ResponsiveContainer width="100%" aspect={2}>
           <BarChart data={data} layout="vertical">
-            <XAxis type="number" hide="true" />
+            <XAxis type="number" hide={true} />
             <YAxis type="category" dataKey="year" />
             <Tooltip/>
             <Legend fontSize={10} layout="vertical" align="right" width={200} verticalAlign="bottom"/>
