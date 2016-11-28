@@ -20,6 +20,9 @@ import precinct30 from './precinct_detail/precinct_30';
 import precinct32 from './precinct_detail/precinct_32';
 import precinct33 from './precinct_detail/precinct_33';
 import precinct34 from './precinct_detail/precinct_34';
+import precinct120 from './precinct_detail/precinct_120';
+import precinct122 from './precinct_detail/precinct_122';
+import precinct123 from './precinct_detail/precinct_123';
 
 const precincts = [
   precinct1,
@@ -44,6 +47,9 @@ const precincts = [
   precinct32,
   precinct33,
   precinct34,
+  precinct120,
+  precinct122,
+  precinct123,
 ];
 
 export default precincts;
